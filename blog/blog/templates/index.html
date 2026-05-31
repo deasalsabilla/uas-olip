@@ -26,6 +26,7 @@
 
     <!-- Main CSS File -->
     <link href="{% static 'assets/css/main.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   </head>
 
   <body class="index-page">
@@ -227,28 +228,16 @@
       <!-- /Latest Posts Section -->
 
       <!-- Call To Action Section -->
-      <section id="call-to-action" class="call-to-action section">
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-          <div class="row gy-4 justify-content-between align-items-center">
-            <div class="col-lg-6">
-              <div class="cta-content" data-aos="fade-up" data-aos-delay="200">
-                <h2>Subscribe to our newsletter</h2>
-                <p>Proin eget tortor risus. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur aliquet quam id dui posuere blandit.</p>
-                <form action="forms/newsletter.php" method="post" class="php-email-form cta-form" data-aos="fade-up" data-aos-delay="300">
-                  <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Email address..." aria-label="Email address" aria-describedby="button-subscribe" />
-                    <button class="btn btn-primary" type="submit" id="button-subscribe">Subscribe</button>
-                  </div>
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your subscription request has been sent. Thank you!</div>
-                </form>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="cta-image" data-aos="zoom-out" data-aos-delay="200">
-                <img src="assets/img/cta/cta-1.webp" alt="" class="img-fluid" />
-              </div>
+      <section id="location-map" class="section pt-3 pb-3">
+        <div class="container" data-aos="fade-up">
+          <div class="section-title text-center mb-5">
+            <h2>Our Location</h2>
+            <p>Visit us or find our location on the map below.</p>
+          </div>
+
+          <div class="row justify-content-center">
+            <div class="col-lg-12">
+              <div id="map" style="height: 500px; border-radius: 15px;"></div>
             </div>
           </div>
         </div>
@@ -395,5 +384,26 @@
 
     <!-- Main JS File -->
     <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+      // Koordinat contoh (Cepu)
+      var map = L.map('map').setView([-7.1475, 111.5906], 13)
+      
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap'
+      }).addTo(map)
+      
+      L.marker([-7.1475, 111.5906])
+        .addTo(map)
+        .bindPopup(
+          `
+                  <b>Blogy Office</b><br>
+                  Cepu, Jawa Tengah
+              `
+        )
+        .openPopup()
+    </script>
   </body>
 </html>
