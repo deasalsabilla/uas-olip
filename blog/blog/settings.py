@@ -130,18 +130,18 @@ JAZZMIN_SETTINGS = {
     # =================================
     # BRANDING
     # =================================
-    "site_title": "Blog Admin",
-    "site_header": "Blog Management",
-    "site_brand": "MyBlog",
+    "site_title": "Blogy Admin",
+    "site_header": "Blogy Management",
+    "site_brand": "Blogy",
 
-    "welcome_sign": "Selamat Datang di Dashboard Blog",
-    "copyright": "MyBlog",
+    "welcome_sign": "Selamat Datang di Dashboard Blogy",
+    "copyright": "Blogy",
 
     # =================================
     # LOGO
     # =================================
-    "site_logo": "assets/img/logo.png",
-    "login_logo": "assets/img/logo.png",
+    "site_logo": "assets/img/logoblogy.png",
+    "login_logo": "assets/img/logoblogy2.png",
 
     # =================================
     # SEARCH
