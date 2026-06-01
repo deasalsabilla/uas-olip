@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Index - Blogy Bootstrap Template</title>
+    <title>Blog Details - Blogy Bootstrap Template</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
@@ -26,10 +26,9 @@
 
     <!-- Main CSS File -->
     <link href="{% static 'assets/css/main.css' %}" rel="stylesheet" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   </head>
 
-  <body class="index-page">
+  <body class="blog-details-page">
     <header id="header" class="header position-relative">
       <div class="container-fluid container-xl position-relative">
         <div class="top-row d-flex align-items-center justify-content-between">
@@ -59,10 +58,10 @@
           <nav id="navmenu" class="navmenu">
             <ul>
               <li>
-                <a href="{% url 'home' %}" class="active">Home</a>
+                <a href="{% url 'home' %}">Home</a>
               </li>
               <li>
-                <a href="{% url 'blog' %}">Daftar Blog</a>
+                <a href="{% url 'blog' %}" class="active">Daftar Blog</a>
               </li>
               <li>
                 <a href="category.html">Statistik</a>
@@ -75,121 +74,122 @@
     </header>
 
     <main class="main">
-      <!-- Call To Action 2 Section -->
-      <section id="call-to-action-2" class="call-to-action-2 section">
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-          <div class="advertise-1 d-flex flex-column flex-lg-row gap-4 align-items-center position-relative">
-            <div class="content-left flex-grow-1" data-aos="fade-right" data-aos-delay="200">
-              <span class="badge text-uppercase mb-2">ARTIKEL TERBARU</span>
-              <h2>Temukan Insight dan Informasi Teknologi Terkini</h2>
-              <p class="my-4">Dapatkan artikel, tutorial, dan informasi terbaru seputar teknologi, pemrograman, pengembangan web, serta berbagai tips digital yang bermanfaat untuk menambah wawasan Anda.</p>
-
-              <div class="features d-flex flex-wrap gap-3 mb-4">
-                <div class="feature-item">
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span>Artikel Berkualitas</span>
-                </div>
-                <div class="feature-item">
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span>Update Terbaru</span>
-                </div>
-                <div class="feature-item">
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span>Tutorial Praktis</span>
-                </div>
-              </div>
-
-              <div class="cta-buttons d-flex flex-wrap gap-3">
-                <a href="#" class="btn btn-primary">Baca Artikel</a>
-                <a href="#" class="btn btn-outline">Tentang Kami</a>
-              </div>
-            </div>
-
-            <div class="content-right position-relative" data-aos="fade-left" data-aos-delay="300">
-              <img src="{% static 'assets/img/blog.png' %}" alt="Digital Platform" class="img-fluid rounded-4" />
-              <div class="floating-card">
-                <div class="card-icon">
-                  <i class="bi bi-graph-up-arrow"></i>
-                </div>
-                <div class="card-content">
-                  <span class="stats-number">245%</span>
-                  <span class="stats-text">Growth Rate</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="decoration">
-              <div class="circle-1"></div>
-              <div class="circle-2"></div>
-            </div>
-          </div>
+      <!-- Page Title -->
+      <div class="page-title">
+        <div class="breadcrumbs">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="#"><i class="bi bi-house"></i> Home</a>
+              </li>
+              <li class="breadcrumb-item">
+                <a href="#">Blog</a>
+              </li>
+              <li class="breadcrumb-item active current">Detail Blog</li>
+            </ol>
+          </nav>
         </div>
-      </section>
-      <!-- /Call To Action 2 Section -->
 
-      <!-- Latest Posts Section -->
-      <section id="latest-posts" class="latest-posts section">
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
-          <h2>Latest Posts</h2>
-          <div>
-            <span>Check Our</span> <span class="description-title">Latest Posts</span>
-          </div>
+        <div class="title-wrapper">
+          <h1>Detail Blog</h1>
         </div>
-        <!-- End Section Title -->
+      </div>
+      <!-- End Page Title -->
 
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-          <div class="row gy-4">
-            {% for post in latest_posts %}
-              <div class="col-lg-4">
-                <article>
-                  <div class="post-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <!-- Blog Details Section -->
+            <section id="blog-details" class="blog-details section">
+              <div class="container" data-aos="fade-up">
+                <article class="article">
+                  <div class="hero-img" data-aos="zoom-in">
                     {% if post.thumbnail %}
-                      <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}" class="img-fluid" />
-                    {% else %}
-                      <img src="https://via.placeholder.com/600x400?text=Blogy" alt="{{ post.title }}" class="img-fluid" />
+                      <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}" class="img-fluid" loading="lazy" />
                     {% endif %}
+
+                    <div class="meta-overlay">
+                      <div class="meta-categories">
+                        <a href="#" class="category">{{ post.category.name }}</a>
+                      </div>
+                    </div>
                   </div>
 
-                  <p class="post-category">{{ post.category.name }}</p>
+                  <div class="article-content" data-aos="fade-up" data-aos-delay="100">
+                    <div class="content-header">
+                      <h1 class="title">{{ post.title }}</h1>
 
-                  <h2 class="title"><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h2>
+                      <div class="author-info">
+                        <div class="author-details">
+                          <div class="info">
+                            <h4>Blogy</h4>
+                            <span class="role">Administrator</span>
+                          </div>
+                        </div>
 
-                  <p class="small text-muted">{{ post.excerpt|truncatechars:100 }}</p>
+                        <div class="post-meta">
+                          {% if post.published_at %}
+                            <span class="date">
+                              <i class="bi bi-calendar3"></i>
+                              {{ post.published_at|date:'d F Y' }}
+                            </span>
+                          {% endif %}
 
-                  <div class="post-meta">
-                    <p class="post-date">
-                      <time datetime="{{ post.published_at|date:'Y-m-d' }}">{{ post.published_at|date:'d M Y' }}</time>
-                    </p>
+                          <span class="divider">•</span>
+
+                          <span class="comments">
+                            <i class="bi bi-eye"></i>
+                            {{ post.views }} Views
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="content">
+                      {% if post.excerpt %}
+                        <p class="lead">{{ post.excerpt }}</p>
+                      {% endif %}
+
+                      {{ post.content|safe }}
+                    </div>
                   </div>
                 </article>
               </div>
-            {% empty %}
-              <div class="col-12 text-center">
-                <p>Belum ada artikel yang dipublikasikan.</p>
+            </section>
+            <!-- /Blog Details Section -->
+          </div>
+
+          <div class="col-lg-4 sidebar">
+            <div class="widgets-container" data-aos="fade-up" data-aos-delay="200">
+              <!-- Categories Widget -->
+              <div class="categories-widget widget-item">
+                <h3 class="widget-title">Categories</h3>
+                <ul class="mt-3">
+                  <li>
+                    <a href="#">General <span>(25)</span></a>
+                  </li>
+                  <li>
+                    <a href="#">Lifestyle <span>(12)</span></a>
+                  </li>
+                  <li>
+                    <a href="#">Travel <span>(5)</span></a>
+                  </li>
+                  <li>
+                    <a href="#">Design <span>(22)</span></a>
+                  </li>
+                  <li>
+                    <a href="#">Creative <span>(8)</span></a>
+                  </li>
+                  <li>
+                    <a href="#">Educaion <span>(14)</span></a>
+                  </li>
+                </ul>
               </div>
-            {% endfor %}
-          </div>
-        </div>
-      </section>
-      <!-- /Latest Posts Section -->
-
-      <!-- Call To Action Section -->
-      <section id="location-map" class="section pt-3 pb-3">
-        <div class="container" data-aos="fade-up">
-          <div class="section-title text-center mb-5">
-            <h2>Our Location</h2>
-            <p>Visit us or find our location on the map below.</p>
-          </div>
-
-          <div class="row justify-content-center">
-            <div class="col-lg-12">
-              <div id="map" style="height: 500px; border-radius: 15px;"></div>
+              <!-- /Categories Widget -->
             </div>
           </div>
         </div>
-      </section>
-      <!-- /Call To Action Section -->
+      </div>
     </main>
 
     <footer id="footer" class="footer">
@@ -331,26 +331,5 @@
 
     <!-- Main JS File -->
     <script src="{% static 'assets/js/main.js' %}"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-    <script>
-      // Koordinat contoh (Cepu)
-      var map = L.map('map').setView([-7.1475, 111.5906], 13)
-      
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; OpenStreetMap'
-      }).addTo(map)
-      
-      L.marker([-7.1475, 111.5906])
-        .addTo(map)
-        .bindPopup(
-          `
-                  <b>Blogy Office</b><br>
-                  Cepu, Jawa Tengah
-              `
-        )
-        .openPopup()
-    </script>
   </body>
 </html>

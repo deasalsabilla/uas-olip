@@ -8,6 +8,7 @@ urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
     path('admin/', admin.site.urls),
     path('', v.home, name='home'),
+    path('blog/', v.blog, name='blog'),
     path('post/<slug:slug>/', v.post_detail, name='post_detail'),
 ]
 

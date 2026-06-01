@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Index - Blogy Bootstrap Template</title>
+    <title>Starter Page - Blogy Bootstrap Template</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
@@ -26,10 +26,10 @@
 
     <!-- Main CSS File -->
     <link href="{% static 'assets/css/main.css' %}" rel="stylesheet" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css" />
   </head>
 
-  <body class="index-page">
+  <body class="starter-page-page">
     <header id="header" class="header position-relative">
       <div class="container-fluid container-xl position-relative">
         <div class="top-row d-flex align-items-center justify-content-between">
@@ -59,10 +59,10 @@
           <nav id="navmenu" class="navmenu">
             <ul>
               <li>
-                <a href="{% url 'home' %}" class="active">Home</a>
+                <a href="{% url 'home' %}">Home</a>
               </li>
               <li>
-                <a href="{% url 'blog' %}">Daftar Blog</a>
+                <a href="{% url 'blog' %}" class="active">Daftar Blog</a>
               </li>
               <li>
                 <a href="category.html">Statistik</a>
@@ -75,121 +75,98 @@
     </header>
 
     <main class="main">
-      <!-- Call To Action 2 Section -->
-      <section id="call-to-action-2" class="call-to-action-2 section">
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-          <div class="advertise-1 d-flex flex-column flex-lg-row gap-4 align-items-center position-relative">
-            <div class="content-left flex-grow-1" data-aos="fade-right" data-aos-delay="200">
-              <span class="badge text-uppercase mb-2">ARTIKEL TERBARU</span>
-              <h2>Temukan Insight dan Informasi Teknologi Terkini</h2>
-              <p class="my-4">Dapatkan artikel, tutorial, dan informasi terbaru seputar teknologi, pemrograman, pengembangan web, serta berbagai tips digital yang bermanfaat untuk menambah wawasan Anda.</p>
-
-              <div class="features d-flex flex-wrap gap-3 mb-4">
-                <div class="feature-item">
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span>Artikel Berkualitas</span>
-                </div>
-                <div class="feature-item">
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span>Update Terbaru</span>
-                </div>
-                <div class="feature-item">
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span>Tutorial Praktis</span>
-                </div>
-              </div>
-
-              <div class="cta-buttons d-flex flex-wrap gap-3">
-                <a href="#" class="btn btn-primary">Baca Artikel</a>
-                <a href="#" class="btn btn-outline">Tentang Kami</a>
-              </div>
-            </div>
-
-            <div class="content-right position-relative" data-aos="fade-left" data-aos-delay="300">
-              <img src="{% static 'assets/img/blog.png' %}" alt="Digital Platform" class="img-fluid rounded-4" />
-              <div class="floating-card">
-                <div class="card-icon">
-                  <i class="bi bi-graph-up-arrow"></i>
-                </div>
-                <div class="card-content">
-                  <span class="stats-number">245%</span>
-                  <span class="stats-text">Growth Rate</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="decoration">
-              <div class="circle-1"></div>
-              <div class="circle-2"></div>
-            </div>
-          </div>
+      <!-- Page Title -->
+      <div class="page-title">
+        <div class="breadcrumbs">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="#"><i class="bi bi-house"></i> Home</a>
+              </li>
+              <li class="breadcrumb-item active current">Daftar Blog</li>
+            </ol>
+          </nav>
         </div>
-      </section>
-      <!-- /Call To Action 2 Section -->
 
-      <!-- Latest Posts Section -->
-      <section id="latest-posts" class="latest-posts section">
-        <!-- Section Title -->
+        <div class="title-wrapper">
+          <h1>Daftar Blog</h1>
+        </div>
+      </div>
+      <!-- End Page Title -->
+
+      <section id="blog-list" class="section">
         <div class="container section-title" data-aos="fade-up">
-          <h2>Latest Posts</h2>
+          <h2>Blog</h2>
           <div>
-            <span>Check Our</span> <span class="description-title">Latest Posts</span>
+            <span>Daftar</span>
+            <span class="description-title">Artikel Blog</span>
           </div>
         </div>
-        <!-- End Section Title -->
 
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-          <div class="row gy-4">
-            {% for post in latest_posts %}
-              <div class="col-lg-4">
-                <article>
-                  <div class="post-img">
-                    {% if post.thumbnail %}
-                      <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}" class="img-fluid" />
-                    {% else %}
-                      <img src="https://via.placeholder.com/600x400?text=Blogy" alt="{{ post.title }}" class="img-fluid" />
-                    {% endif %}
-                  </div>
-
-                  <p class="post-category">{{ post.category.name }}</p>
-
-                  <h2 class="title"><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h2>
-
-                  <p class="small text-muted">{{ post.excerpt|truncatechars:100 }}</p>
-
-                  <div class="post-meta">
-                    <p class="post-date">
-                      <time datetime="{{ post.published_at|date:'Y-m-d' }}">{{ post.published_at|date:'d M Y' }}</time>
-                    </p>
-                  </div>
-                </article>
-              </div>
-            {% empty %}
-              <div class="col-12 text-center">
-                <p>Belum ada artikel yang dipublikasikan.</p>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-      </section>
-      <!-- /Latest Posts Section -->
-
-      <!-- Call To Action Section -->
-      <section id="location-map" class="section pt-3 pb-3">
         <div class="container" data-aos="fade-up">
-          <div class="section-title text-center mb-5">
-            <h2>Our Location</h2>
-            <p>Visit us or find our location on the map below.</p>
-          </div>
+          <div class="table-responsive">
+            <table id="blogTable" class="table table-bordered table-hover align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th width="100">Thumbnail</th>
+                  <th>Judul</th>
+                  <th>Kategori</th>
+                  <th>Views</th>
+                  <th>Tanggal Publish</th>
+                  <th width="120">Aksi</th>
+                </tr>
+              </thead>
 
-          <div class="row justify-content-center">
-            <div class="col-lg-12">
-              <div id="map" style="height: 500px; border-radius: 15px;"></div>
-            </div>
+              <tbody>
+                {% for post in posts %}
+                  <tr>
+                    <td>
+                      {% if post.thumbnail %}
+                        <img src="{{ post.thumbnail.url }}" class="img-fluid rounded" style="width:80px;height:60px;object-fit:cover;" />
+                      {% else %}
+                        -
+                      {% endif %}
+                    </td>
+
+                    <td>
+                      <strong>{{ post.title }}</strong>
+
+                      {% if post.excerpt %}
+                        <br />
+                        <small class="text-muted">{{ post.excerpt|truncatechars:100 }}</small>
+                      {% endif %}
+                    </td>
+
+                    <td>
+                      <span class="badge bg-primary">{{ post.category.name }}</span>
+                    </td>
+
+                    <td>
+                      <i class="bi bi-eye"></i>
+                      {{ post.views }}
+                    </td>
+
+                    <td>
+                      {% if post.published_at %}
+                        {{ post.published_at|date:'d M Y' }}
+                      {% else %}
+                        -
+                      {% endif %}
+                    </td>
+
+                    <td>
+                      <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary btn-sm">
+                        <i class="bi bi-book"></i>
+                        Baca
+                      </a>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
-      <!-- /Call To Action Section -->
     </main>
 
     <footer id="footer" class="footer">
@@ -331,26 +308,28 @@
 
     <!-- Main JS File -->
     <script src="{% static 'assets/js/main.js' %}"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
 
     <script>
-      // Koordinat contoh (Cepu)
-      var map = L.map('map').setView([-7.1475, 111.5906], 13)
-      
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; OpenStreetMap'
-      }).addTo(map)
-      
-      L.marker([-7.1475, 111.5906])
-        .addTo(map)
-        .bindPopup(
-          `
-                  <b>Blogy Office</b><br>
-                  Cepu, Jawa Tengah
-              `
-        )
-        .openPopup()
+      $(document).ready(function () {
+        $('#blogTable').DataTable({
+          pageLength: 10,
+          order: [[4, 'desc']],
+          language: {
+            search: 'Cari:',
+            lengthMenu: 'Tampilkan _MENU_ data',
+            info: 'Menampilkan _START_ - _END_ dari _TOTAL_ data',
+            paginate: {
+              previous: 'Sebelumnya',
+              next: 'Berikutnya'
+            }
+          }
+        })
+      })
     </script>
   </body>
 </html>
