@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Detail Blog - Blogy</title>
+    <title>Statistik - Blogy</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
@@ -28,7 +28,7 @@
     <link href="{% static 'assets/css/main.css' %}" rel="stylesheet" />
   </head>
 
-  <body class="blog-details-page">
+  <body class="starter-page-page">
     <header id="header" class="header position-relative">
       <div class="container-fluid container-xl position-relative">
         <div class="top-row d-flex align-items-center justify-content-between">
@@ -61,10 +61,10 @@
                 <a href="{% url 'home' %}">Home</a>
               </li>
               <li>
-                <a href="{% url 'blog' %}" class="active">Daftar Blog</a>
+                <a href="{% url 'blog' %}">Daftar Blog</a>
               </li>
               <li>
-                <a href="{% url 'statistik' %}">Statistik</a>
+                <a href="{% url 'statistik' %}" class="active">Statistik</a>
               </li>
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -82,114 +82,112 @@
               <li class="breadcrumb-item">
                 <a href="#"><i class="bi bi-house"></i> Home</a>
               </li>
-              <li class="breadcrumb-item">
-                <a href="#">Blog</a>
-              </li>
-              <li class="breadcrumb-item active current">Detail Blog</li>
+              <li class="breadcrumb-item active current">Statistik</li>
             </ol>
           </nav>
         </div>
 
         <div class="title-wrapper">
-          <h1>Detail Blog</h1>
+          <h1>Statistik</h1>
         </div>
       </div>
       <!-- End Page Title -->
 
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8">
-            <!-- Blog Details Section -->
-            <section id="blog-details" class="blog-details section">
-              <div class="container" data-aos="fade-up">
-                <article class="article">
-                  <div class="hero-img" data-aos="zoom-in">
-                    {% if post.thumbnail %}
-                      <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}" class="img-fluid" loading="lazy" />
-                    {% endif %}
+      <section id="statistics" class="section">
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Statistics</h2>
+          <div>
+            <span>Blog</span>
+            <span class="description-title">Statistics Dashboard</span>
+          </div>
+        </div>
 
-                    <div class="meta-overlay">
-                      <div class="meta-categories">
-                        <a href="#" class="category">{{ post.category.name }}</a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="article-content" data-aos="fade-up" data-aos-delay="100">
-                    <div class="content-header">
-                      <h1 class="title">{{ post.title }}</h1>
-
-                      <div class="author-info">
-                        <div class="author-details">
-                          <div class="info">
-                            <h4>Blogy</h4>
-                            <span class="role">Administrator</span>
-                          </div>
-                        </div>
-
-                        <div class="post-meta">
-                          {% if post.published_at %}
-                            <span class="date">
-                              <i class="bi bi-calendar3"></i>
-                              {{ post.published_at|date:'d F Y' }}
-                            </span>
-                          {% endif %}
-
-                          <span class="divider">•</span>
-
-                          <span class="comments">
-                            <i class="bi bi-eye"></i>
-                            {{ post.views }} Views
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="content">
-                      {% if post.excerpt %}
-                        <p class="lead">{{ post.excerpt }}</p>
-                      {% endif %}
-
-                      {{ post.content|safe }}
-                    </div>
-                  </div>
-                </article>
+        <div class="container">
+          <div class="row g-4 mb-5">
+            <div class="col-lg-3 col-md-6">
+              <div class="card text-center shadow-sm">
+                <div class="card-body">
+                  <h3>{{ total_post }}</h3>
+                  <p class="mb-0">Total Posts</p>
+                </div>
               </div>
-            </section>
-            <!-- /Blog Details Section -->
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+              <div class="card text-center shadow-sm">
+                <div class="card-body">
+                  <h3>{{ total_category }}</h3>
+                  <p class="mb-0">Categories</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+              <div class="card text-center shadow-sm">
+                <div class="card-body">
+                  <h3>{{ total_published }}</h3>
+                  <p class="mb-0">Published Posts</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+              <div class="card text-center shadow-sm">
+                <div class="card-body">
+                  <h3>{{ total_views }}</h3>
+                  <p class="mb-0">Total Views</p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="col-lg-4 sidebar">
-            <div class="widgets-container" data-aos="fade-up" data-aos-delay="200">
-              <!-- Categories Widget -->
-              <div class="categories-widget widget-item">
-                <h3 class="widget-title">Categories</h3>
-                <ul class="mt-3">
-                  <li>
-                    <a href="#">General <span>(25)</span></a>
-                  </li>
-                  <li>
-                    <a href="#">Lifestyle <span>(12)</span></a>
-                  </li>
-                  <li>
-                    <a href="#">Travel <span>(5)</span></a>
-                  </li>
-                  <li>
-                    <a href="#">Design <span>(22)</span></a>
-                  </li>
-                  <li>
-                    <a href="#">Creative <span>(8)</span></a>
-                  </li>
-                  <li>
-                    <a href="#">Educaion <span>(14)</span></a>
-                  </li>
-                </ul>
+          <div class="row g-4">
+            <div class="col-lg-6">
+              <div class="card shadow-sm">
+                <div class="card-header">Artikel per Kategori</div>
+                <div class="card-body">
+                  <canvas id="categoryChart"></canvas>
+                </div>
               </div>
-              <!-- /Categories Widget -->
+            </div>
+
+            <div class="col-lg-6">
+              <div class="card shadow-sm">
+                <div class="card-header">Artikel per Bulan</div>
+                <div class="card-body">
+                  <canvas id="monthlyChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card shadow-sm mt-4">
+            <div class="card-header">Top 5 Artikel Terpopuler</div>
+
+            <div class="card-body">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Judul</th>
+                    <th>Kategori</th>
+                    <th>Views</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {% for post in top_posts %}
+                    <tr>
+                      <td>{{ post.title }}</td>
+                      <td>{{ post.category.name }}</td>
+                      <td>{{ post.views }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </main>
 
     <footer id="footer" class="footer">
@@ -219,5 +217,45 @@
 
     <!-- Main JS File -->
     <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+new Chart(
+    document.getElementById('categoryChart'),
+    {
+        type: 'doughnut',
+        data: {
+            labels: {{ category_labels|safe }},
+            datasets: [{
+                data: {{ category_data|safe }}
+            }]
+        }
+    }
+);
+
+new Chart(
+    document.getElementById('monthlyChart'),
+    {
+        type: 'bar',
+        data: {
+            labels: {{ monthly_labels|safe }},
+            datasets: [{
+                label: 'Jumlah Artikel',
+                data: {{ monthly_data|safe }}
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    }
+);
+
+</script>
   </body>
 </html>
